@@ -15,6 +15,7 @@ class Team():
         self.total_score = sum(self.scores)
         self.avg_score = self.total_score / len(self.scores)
         self.cumulative_score = []
+        self.get_cumulative_scores()
 
     def get_scores(self):
         """Gets list of scores from csv file"""
@@ -30,7 +31,12 @@ class Team():
                 self.scores[i] = int(self.scores[i])
 
     def get_cumulative_scores(self):
-        
+        for i in range(len(self.scores)):
+            if len(self.cumulative_score) == 0:
+                self.cumulative_score.append(self.scores[i])
+            else:
+                self.cumulative_score.append(self.scores[i]
+                                             + self.cumulative_score[i-1])
 
 teams = [
     'Green Ducks',
@@ -52,3 +58,6 @@ teams = [
 ]
 
 team_list = [Team(team) for team in teams]
+
+for team in team_list:
+    print(team.cumulative_score)
